@@ -1,5 +1,6 @@
 import 'package:checkout/app/core/domain/checkout_entity.dart';
-import 'package:checkout/app/core/domain/product_entity.dart';
+import 'package:checkout/app/core/domain/models/product_model.dart';
+
 import 'package:checkout/app/core/domain/promotions/bulk_promotion_entity.dart';
 import 'package:checkout/app/core/domain/promotions/combo_promotion_entity.dart';
 import 'package:checkout/app/core/domain/promotions/free_item_promotion_entity.dart';
@@ -9,7 +10,7 @@ void main() {
   group('Checkout', () {
     test('should calculate total for single product with no promotions', () {
       var checkout = CheckoutEntity();
-      checkout.scanProduct(ProductEntity('A', 0.50));
+      checkout.scanProduct(ProductModel('A', 0.50));
 
       checkout.calcTotal();
 
@@ -18,8 +19,8 @@ void main() {
 
     test('should calculate total for two products with no promotions', () {
       var checkout = CheckoutEntity();
-      checkout.scanProduct(ProductEntity('A', 0.50));
-      checkout.scanProduct(ProductEntity('C', 1.50));
+      checkout.scanProduct(ProductModel('A', 0.50));
+      checkout.scanProduct(ProductModel('C', 1.50));
 
       checkout.calcTotal();
 
@@ -28,7 +29,7 @@ void main() {
 
     test('should handle promotions with no applicable items', () {
       var checkout = CheckoutEntity();
-      checkout.scanProduct(ProductEntity('A', 0.50));
+      checkout.scanProduct(ProductModel('A', 0.50));
 
       checkout.addPromotion(BulkPromotionEntity('B', 2, 1.25));
       checkout.addPromotion(FreeItemPromotionEntity('C', 3));
@@ -43,8 +44,8 @@ void main() {
   group('BulkPromotionEntity', () {
     test('should apply bulk promotion for item B (2 for 1.25)', () {
       var checkout = CheckoutEntity();
-      checkout.scanProduct(ProductEntity('B', 0.75));
-      checkout.scanProduct(ProductEntity('B', 0.75));
+      checkout.scanProduct(ProductModel('B', 0.75));
+      checkout.scanProduct(ProductModel('B', 0.75));
 
       checkout.addPromotion(BulkPromotionEntity('B', 2, 1.25));
 
@@ -55,9 +56,9 @@ void main() {
 
     test('should calculate total correctly for more than 2 items of B', () {
       var checkout = CheckoutEntity();
-      checkout.scanProduct(ProductEntity('B', 0.75));
-      checkout.scanProduct(ProductEntity('B', 0.75));
-      checkout.scanProduct(ProductEntity('B', 0.75));
+      checkout.scanProduct(ProductModel('B', 0.75));
+      checkout.scanProduct(ProductModel('B', 0.75));
+      checkout.scanProduct(ProductModel('B', 0.75));
 
       checkout.addPromotion(BulkPromotionEntity('B', 2, 1.25));
 
@@ -70,10 +71,10 @@ void main() {
   group('FreeItemPromotionEntity', () {
     test('should apply free item promotion for item C (Buy 3, get 1 free)', () {
       var checkout = CheckoutEntity();
-      checkout.scanProduct(ProductEntity('C', 0.25));
-      checkout.scanProduct(ProductEntity('C', 0.25));
-      checkout.scanProduct(ProductEntity('C', 0.25));
-      checkout.scanProduct(ProductEntity('C', 0.25));
+      checkout.scanProduct(ProductModel('C', 0.25));
+      checkout.scanProduct(ProductModel('C', 0.25));
+      checkout.scanProduct(ProductModel('C', 0.25));
+      checkout.scanProduct(ProductModel('C', 0.25));
 
       checkout.addPromotion(FreeItemPromotionEntity('C', 3));
 
@@ -86,8 +87,8 @@ void main() {
   group('ComboPromotionEntity', () {
     test('should apply combo promotion for items D and E', () {
       var checkout = CheckoutEntity();
-      checkout.scanProduct(ProductEntity('D', 1.50));
-      checkout.scanProduct(ProductEntity('E', 2.00));
+      checkout.scanProduct(ProductModel('D', 1.50));
+      checkout.scanProduct(ProductModel('E', 2.00));
 
       checkout.addPromotion(ComboPromotionEntity('D', 'E', 3.00));
 
@@ -100,25 +101,25 @@ void main() {
   group('Mixed promotions', () {
     test('should handle mixed promotions correctly', () {
       var checkout = CheckoutEntity();
-      checkout.scanProduct(ProductEntity('D', 3));
-      checkout.scanProduct(ProductEntity('E', 3));
-      checkout.scanProduct(ProductEntity('F', 3));
-      checkout.scanProduct(ProductEntity('C', 2));
+      checkout.scanProduct(ProductModel('D', 3));
+      checkout.scanProduct(ProductModel('E', 3));
+      checkout.scanProduct(ProductModel('F', 3));
+      checkout.scanProduct(ProductModel('C', 2));
 
-      checkout.scanProduct(ProductEntity('B', 2));
-      checkout.scanProduct(ProductEntity('B', 2));
-      checkout.scanProduct(ProductEntity('A', 1));
-      checkout.scanProduct(ProductEntity('B', 2));
-      checkout.scanProduct(ProductEntity('A', 1));
-      checkout.scanProduct(ProductEntity('A', 1));
-      checkout.scanProduct(ProductEntity('B', 2));
-      checkout.scanProduct(ProductEntity('B', 2));
-      checkout.scanProduct(ProductEntity('B', 2));
-      checkout.scanProduct(ProductEntity('C', 2));
-      checkout.scanProduct(ProductEntity('A', 1));
-      checkout.scanProduct(ProductEntity('B', 2));
-      checkout.scanProduct(ProductEntity('A', 1));
-      checkout.scanProduct(ProductEntity('C', 2));
+      checkout.scanProduct(ProductModel('B', 2));
+      checkout.scanProduct(ProductModel('B', 2));
+      checkout.scanProduct(ProductModel('A', 1));
+      checkout.scanProduct(ProductModel('B', 2));
+      checkout.scanProduct(ProductModel('A', 1));
+      checkout.scanProduct(ProductModel('A', 1));
+      checkout.scanProduct(ProductModel('B', 2));
+      checkout.scanProduct(ProductModel('B', 2));
+      checkout.scanProduct(ProductModel('B', 2));
+      checkout.scanProduct(ProductModel('C', 2));
+      checkout.scanProduct(ProductModel('A', 1));
+      checkout.scanProduct(ProductModel('B', 2));
+      checkout.scanProduct(ProductModel('A', 1));
+      checkout.scanProduct(ProductModel('C', 2));
 
       /* ComboPromotion */
       // D + E => R$ 5,00
