@@ -6,14 +6,20 @@ import 'package:flutter/material.dart';
 import '../../../../core/failures/product_already_exist_failure.dart';
 import '../../domain/usecases/add_product_stock_usecase.dart';
 import '../../domain/usecases/fetch_products_stock_usecase.dart';
+import '../../domain/usecases/remove_product_stock_usecase.dart';
 
 class ProductsController extends ChangeNotifier {
   final FetchProductsStockUsecase fetchProductsStockUsecase;
   final AddProductStockUsecase addProductStockUsecase;
+  final RemoveProductStockUsecase removeProductStockUsecase;
 
   List<ProductEntity> productStock = [];
 
-  ProductsController({required this.fetchProductsStockUsecase, required this.addProductStockUsecase}) {
+  ProductsController({
+    required this.fetchProductsStockUsecase,
+    required this.addProductStockUsecase,
+    required this.removeProductStockUsecase,
+  }) {
     _fetchProducts();
   }
 
@@ -35,6 +41,16 @@ class ProductsController extends ChangeNotifier {
       if (scaffoldMessengerKey.currentContext != null) {
         scaffoldMessengerKey.currentState?.showSnackBar(SnackBar(content: Text(e.messageError)));
       }
+    } catch (e) {
+      //TODO tratar possíveis erros
+    }
+    notifyListeners();
+  }
+
+  Future<void> removeProduct(ProductEntity product) async {
+    try {
+      await removeProductStockUsecase(product);
+      _fetchProducts();
     } catch (e) {
       //TODO tratar possíveis erros
     }

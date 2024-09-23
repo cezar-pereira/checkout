@@ -38,6 +38,10 @@ class _ProductsPageState extends State<ProductsPage> {
                     return ListTile(
                       title: Text(product.sku),
                       subtitle: Text(product.unitPrice.toString()),
+                      trailing: IconButton(
+                        onPressed: () => controller.removeProduct(product),
+                        icon: const Icon(Icons.delete),
+                      ),
                     );
                   },
                   separatorBuilder: (_, __) => const SizedBox(height: 12),

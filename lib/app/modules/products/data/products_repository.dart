@@ -25,4 +25,13 @@ class ProductsRepositoryImp extends ProductsRepository {
       rethrow;
     }
   }
+
+  @override
+  Future<void> removeProductStock(ProductEntity product) async {
+    try {
+      return await datasource.removeProductStock(product);
+    } catch (e) {
+      rethrow;
+    }
+  }
 }

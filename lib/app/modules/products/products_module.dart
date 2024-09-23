@@ -8,6 +8,7 @@ import 'package:flutter_modular/flutter_modular.dart';
 import 'domain/repositories/products_repository.dart';
 import 'domain/usecases/add_product_stock_usecase.dart';
 import 'domain/usecases/fetch_products_stock_usecase.dart';
+import 'domain/usecases/remove_product_stock_usecase.dart';
 import 'presentation/controllers/products_controller.dart';
 
 class ProductsModule extends Module {
@@ -21,6 +22,7 @@ class ProductsModule extends Module {
     /* USECASES */
     i.addLazySingleton<FetchProductsStockUsecase>(FetchProductsStockUsecaseImp.new);
     i.addLazySingleton<AddProductStockUsecase>(AddProductStockUsecaseImp.new);
+    i.addLazySingleton<RemoveProductStockUsecase>(RemoveProductStockUsecaseImp.new);
     /* CONTROLLERS */
     i.add<ProductsController>(ProductsController.new);
     super.binds(i);
