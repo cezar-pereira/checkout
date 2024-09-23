@@ -6,20 +6,24 @@ class CheckoutEntity {
   final List<ProductEntity> _scannedItems = [];
   final List<Promotion> _promotions = [];
   final List<DiscountEntity> _discounts = [];
-  double _total = 0;
+  double _subTotal = 0;
 
-  double get total => _total;
+  double get subTotal => _subTotal;
   List<DiscountEntity> get discounts => _discounts;
+  List<ProductEntity> get scannedItems => _scannedItems;
+
+  double get total => _scannedItems.fold(0.0, (sum, item) => sum + item.unitPrice);
 
   void scanProduct(ProductEntity product) {
     _scannedItems.add(product);
   }
 
-  void addPromotion(Promotion promotion) {
-    _promotions.add(promotion);
+  void addPromotions(List<Promotion> promotions) {
+    _promotions.addAll(promotions);
   }
 
   void calcTotal() {
+    _discounts.clear();
     double total = 0;
     List<ProductEntity> remainingItems = List.from(_scannedItems);
 
@@ -41,6 +45,6 @@ class CheckoutEntity {
     final sumItensWithOutPromotion = remainingItems.fold(0.0, (sum, item) => sum + item.unitPrice);
     total += sumItensWithOutPromotion;
 
-    _total = total;
+    _subTotal = total;
   }
 }

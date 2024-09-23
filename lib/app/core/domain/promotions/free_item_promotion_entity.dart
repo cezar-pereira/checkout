@@ -11,7 +11,7 @@ class FreeItemPromotionEntity extends Promotion {
   @override
   DiscountEntity? apply(List<ProductEntity> items) {
     int count = items.where((item) => item.sku == sku).length;
-    if (count == 0) return null;
+    if (count < requiredQuantity) return null;
 
     ProductEntity item = items.firstWhere((item) => item.sku == sku);
 

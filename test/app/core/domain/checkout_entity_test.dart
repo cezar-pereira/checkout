@@ -14,7 +14,7 @@ void main() {
 
       checkout.calcTotal();
 
-      expect(checkout.total, equals(0.50));
+      expect(checkout.subTotal, equals(0.50));
     });
 
     test('should calculate total for two products with no promotions', () {
@@ -24,20 +24,20 @@ void main() {
 
       checkout.calcTotal();
 
-      expect(checkout.total, equals(2.0));
+      expect(checkout.subTotal, equals(2.0));
     });
 
     test('should handle promotions with no applicable items', () {
       var checkout = CheckoutEntity();
       checkout.scanProduct(ProductModel('A', 0.50));
 
-      checkout.addPromotion(BulkPromotionEntity('B', 2, 1.25));
-      checkout.addPromotion(FreeItemPromotionEntity('C', 3));
-      checkout.addPromotion(ComboPromotionEntity('D', 'E', 3.00));
+      checkout.addPromotions([BulkPromotionEntity('B', 2, 1.25)]);
+      checkout.addPromotions([FreeItemPromotionEntity('C', 3)]);
+      checkout.addPromotions([ComboPromotionEntity('D', 'E', 3.00)]);
 
       checkout.calcTotal();
 
-      expect(checkout.total, equals(0.50));
+      expect(checkout.subTotal, equals(0.50));
     });
   });
 
@@ -47,11 +47,11 @@ void main() {
       checkout.scanProduct(ProductModel('B', 0.75));
       checkout.scanProduct(ProductModel('B', 0.75));
 
-      checkout.addPromotion(BulkPromotionEntity('B', 2, 1.25));
+      checkout.addPromotions([BulkPromotionEntity('B', 2, 1.25)]);
 
       checkout.calcTotal();
 
-      expect(checkout.total, equals(1.25));
+      expect(checkout.subTotal, equals(1.25));
     });
 
     test('should calculate total correctly for more than 2 items of B', () {
@@ -60,11 +60,11 @@ void main() {
       checkout.scanProduct(ProductModel('B', 0.75));
       checkout.scanProduct(ProductModel('B', 0.75));
 
-      checkout.addPromotion(BulkPromotionEntity('B', 2, 1.25));
+      checkout.addPromotions([BulkPromotionEntity('B', 2, 1.25)]);
 
       checkout.calcTotal();
 
-      expect(checkout.total, equals(2.0)); // 2 for 1.25 + 1 for 0.75
+      expect(checkout.subTotal, equals(2.0)); // 2 for 1.25 + 1 for 0.75
     });
   });
 
@@ -76,11 +76,11 @@ void main() {
       checkout.scanProduct(ProductModel('C', 0.25));
       checkout.scanProduct(ProductModel('C', 0.25));
 
-      checkout.addPromotion(FreeItemPromotionEntity('C', 3));
+      checkout.addPromotions([FreeItemPromotionEntity('C', 3)]);
 
       checkout.calcTotal();
 
-      expect(checkout.total, equals(0.75)); // Pay for 3, 1 free
+      expect(checkout.subTotal, equals(0.75)); // Pay for 3, 1 free
     });
   });
 
@@ -90,11 +90,11 @@ void main() {
       checkout.scanProduct(ProductModel('D', 1.50));
       checkout.scanProduct(ProductModel('E', 2.00));
 
-      checkout.addPromotion(ComboPromotionEntity('D', 'E', 3.00));
+      checkout.addPromotions([ComboPromotionEntity('D', 'E', 3.00)]);
 
       checkout.calcTotal();
 
-      expect(checkout.total, equals(3.00));
+      expect(checkout.subTotal, equals(3.00));
     });
   });
 
@@ -140,15 +140,15 @@ void main() {
 
       double withNoPromotionPrice = 3;
 
-      checkout.addPromotion(ComboPromotionEntity('D', 'E', 5));
-      checkout.addPromotion(FreeItemPromotionEntity('A', 3));
-      checkout.addPromotion(FreeItemPromotionEntity('B', 3));
-      checkout.addPromotion(BulkPromotionEntity('C', 2, 3));
+      checkout.addPromotions([ComboPromotionEntity('D', 'E', 5)]);
+      checkout.addPromotions([FreeItemPromotionEntity('A', 3)]);
+      checkout.addPromotions([FreeItemPromotionEntity('B', 3)]);
+      checkout.addPromotions([BulkPromotionEntity('C', 2, 3)]);
 
       checkout.calcTotal();
 
       expect(
-        checkout.total,
+        checkout.subTotal,
         equals(comboPromotionPrice + freeItemPromotionPrice + bulkPromotionPrice + withNoPromotionPrice),
       );
     });
