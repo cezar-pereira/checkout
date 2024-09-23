@@ -1,3 +1,4 @@
+import 'package:checkout/app/modules/checkout/checkout_module.dart';
 import 'package:checkout/app/modules/home/home_module.dart';
 import 'package:checkout/app/modules/products/products_module.dart';
 import 'package:flutter_modular/flutter_modular.dart';
@@ -20,5 +21,6 @@ class AppModule extends Module {
     r.module(Modular.initialRoute, module: HomeModule());
     r.module(Modular.initialRoute, module: ProductsModule());
     r.module(Modular.initialRoute, module: PromotionsModule());
+    r.module(Modular.initialRoute, module: CheckoutModule());
   }
 }

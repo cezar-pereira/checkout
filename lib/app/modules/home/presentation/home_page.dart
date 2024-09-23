@@ -29,7 +29,7 @@ class _HomePageState extends State<HomePage> {
               icon: const Icon(Icons.discount),
             ),
             ElevatedButton.icon(
-              onPressed: () {},
+              onPressed: () => CustomNavigator.pushNamed(AppRoutes.checkout),
               label: const Text('Iniciar venda'),
               icon: const Icon(Icons.add_shopping_cart_rounded),
             ),
