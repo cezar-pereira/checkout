@@ -1,16 +1,123 @@
-# checkout
+# Checkout Project
 
-A new Flutter project.
+Este é um projeto simples de checkout
 
-## Getting Started
+## Pré-requisitos
 
-This project is a starting point for a Flutter application.
+Antes de começar, você precisa ter as seguintes ferramentas instaladas em sua máquina:
 
-A few resources to get you started if this is your first Flutter project:
+- [Flutter SDK](https://flutter.dev/docs/get-started/install) (Versão 3.24.1)
+- [Android Studio](https://developer.android.com/studio) ou [Visual Studio Code](https://code.visualstudio.com/) com o plugin do Flutter
+- Emulador Android ou dispositivo físico
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+## Packages utilizados
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+1. flutter_modular
+2. shared_preferences
+
+## Funcionalidades
+
+1. #### Adicionar, remover e listar produtos
+2. #### Listar promoções
+3. #### Iniciar venda
+
+## Testes unitários
+
+1. #### Testes da classe CheckoutEntity
+
+## Instalação
+
+1. Clone este repositório:
+
+   ```bash
+   git clone https://github.com/cezar-pereira/checkout.git
+   ```
+
+2. Acesse o diretório do projeto
+
+3. Instale as dependências do Flutter:
+
+   ```bash
+   flutter pub get
+   ```
+
+4. Execute o projeto:
+
+   ```bash
+   flutter run
+   ```
+
+## Estrutura do projeto:
+
+```
+└── 📁lib
+    └── 📁app
+        └── 📁core
+            └── 📁domain
+                └── 📁models
+                    └── product_model.dart
+                └── 📁promotions
+                    └── bulk_promotion_entity.dart
+                    └── combo_promotion_entity.dart
+                    └── free_item_promotion_entity.dart
+                └── checkout_entity.dart
+                └── discount_entity.dart
+                └── product_entity.dart
+                └── promotion.dart
+            └── 📁failures
+                └── failure.dart
+                └── product_already_exist_failure.dart
+        └── 📁modules
+            └── 📁checkout
+                └── 📁presentation
+                    └── 📁controllers
+                        └── checkout_controller.dart
+                    └── 📁pages
+                        └── checkout_page.dart
+                └── checkout_module.dart
+            └── 📁home
+                └── 📁presentation
+                    └── home_page.dart
+                └── home_module.dart
+            └── 📁products
+                └── 📁data
+                    └── products_datasource.dart
+                    └── products_repository.dart
+                └── 📁domain
+                    └── 📁repositories
+                        └── products_repository.dart
+                    └── 📁usecases
+                        └── add_product_stock_usecase.dart
+                        └── fetch_products_stock_usecase.dart
+                        └── remove_product_stock_usecase.dart
+                └── 📁presentation
+                    └── 📁controllers
+                        └── products_controller.dart
+                    └── 📁pages
+                        └── products_page.dart
+                    └── 📁widgets
+                        └── add_product_widget.dart
+                └── products_module.dart
+            └── 📁promotions
+                └── 📁data
+                    └── promotions_datasource.dart
+                    └── promotions_repository.dart
+                └── 📁domain
+                    └── 📁repositories
+                        └── promotions_repository.dart
+                    └── 📁usecases
+                        └── fetch_promotions_usecase.dart
+                └── 📁presentation
+                    └── 📁controllers
+                        └── promotions_controller.dart
+                    └── 📁pages
+                        └── promotions_page.dart
+                └── promotions_module.dart
+        └── 📁utils
+            └── custom_inject.dart
+            └── custom_navigator.dart
+        └── app_module.dart
+        └── app_routes.dart
+        └── app_widget.dart
+    └── main.dart
+```
