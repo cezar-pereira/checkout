@@ -24,7 +24,7 @@ class _HomePageState extends State<HomePage> {
               icon: const Icon(Icons.format_align_left_sharp),
             ),
             ElevatedButton.icon(
-              onPressed: () {},
+              onPressed: () => CustomNavigator.pushNamed(AppRoutes.promotions),
               label: const Text('Promoções'),
               icon: const Icon(Icons.discount),
             ),
