@@ -30,4 +30,12 @@ class ComboPromotionEntity extends Promotion {
 
     return DiscountEntity(items: [item1, item2], totalDiscount: totalDiscount, priceToPay: priceToPay);
   }
+
+  @override
+  String toString() {
+    return 'Produtos: $sku1 e $sku2 | Preço promocional: $comboPrice';
+  }
+
+  @override
+  String get label => 'Oferta combinada';
 }

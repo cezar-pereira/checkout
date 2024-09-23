@@ -26,4 +26,10 @@ class BulkPromotionEntity extends Promotion {
       priceToPay: priceToPay,
     );
   }
+
+  @override
+  String toString() => 'Produto: $sku | Quantidade mínima: $requiredQuantity | Preço especial: $specialPrice';
+
+  @override
+  String get label => 'Preço em múltiplos';
 }

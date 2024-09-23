@@ -26,4 +26,10 @@ class FreeItemPromotionEntity extends Promotion {
       priceToPay: priceToPay,
     );
   }
+
+  @override
+  String toString() => 'Produto: $sku | Quantidade mínima: $requiredQuantity';
+
+  @override
+  String get label => 'Compre N e ganhe 1 grátis';
 }

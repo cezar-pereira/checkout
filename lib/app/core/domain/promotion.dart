@@ -4,4 +4,6 @@ import 'product_entity.dart';
 
 abstract class Promotion {
   DiscountEntity? apply(List<ProductEntity> items);
+
+  String get label;
 }
